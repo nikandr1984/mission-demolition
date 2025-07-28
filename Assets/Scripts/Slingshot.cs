@@ -127,6 +127,9 @@ public class Slingshot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         projectileRigidbody.isKinematic = false;
         projectileRigidbody.linearVelocity = launchVector * velocityMult;
 
+        //  амера следит за снар€дом
+        FollowCam.POI = projectile;
+        
         // —брасываем ссылку на снар€д (он теперь управл€етс€ физикой)
         projectile = null;            
     }
