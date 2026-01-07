@@ -1,0 +1,1221 @@
+fileFormatVersion: 2
+guid: 63f0695148c905548bfd423db5028bfd
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Stone_Beam_Long_1
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 192
+        width: 205
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53f72170c6920024cb3d8363f592ca3e
+      internalID: -1193441250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Beam_Long_2
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 169
+        width: 205
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49ac984a72044bc4fa6cf72e964eff48
+      internalID: 290470433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Beam_Long_3
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 148
+        width: 205
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b85f0c1c3aec554b980b8f938f4f5ce
+      internalID: -378244978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Beam_Long_4
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 126
+        width: 205
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e3f9c686f861e848a8bac0d1ffa9f0c
+      internalID: 1637121888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Beam_Medium_1
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 103
+        width: 169
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a77ba84bb66377c4ba5be276e3d83af2
+      internalID: 349881320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Beam_Medium_2
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 81
+        width: 169
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1bb4d409881edff40b2f96ebd80ef71c
+      internalID: -1917404864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Beam_Medium_3
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 59
+        width: 169
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b57eecffa5e7d274e97fa2db15fa3449
+      internalID: -676850750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Beam_Medium_4
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 37
+        width: 169
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 714fa37477a3e8e40aa37bbc3bead2f7
+      internalID: -1895582801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Beam_Short_1
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 104
+        width: 85
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a795a027ad788f640ac3582803b4b747
+      internalID: 1814605432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Beam_Short_4
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 82
+        width: 85
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70df949fa2638d042abcfd930ce7cd98
+      internalID: -165435437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Beam_Short_2
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 16
+        width: 84
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e5b40abe3fceb444a23adc2ca71da5b
+      internalID: 843107926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Beam_Short_3
+      rect:
+        serializedVersion: 2
+        x: 332
+        y: 16
+        width: 84
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a230df57dbb75249822af3f7c5f4c74
+      internalID: -367844771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Beam_Tiny_1
+      rect:
+        serializedVersion: 2
+        x: 453
+        y: 192
+        width: 42
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4df9adfc233d6334dbe0a84f615962ea
+      internalID: 1812531313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Beam_Tiny_2
+      rect:
+        serializedVersion: 2
+        x: 453
+        y: 170
+        width: 42
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e26780eb01de88409c1affcc3661314
+      internalID: 131219738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Beam_Tiny_3
+      rect:
+        serializedVersion: 2
+        x: 453
+        y: 148
+        width: 42
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f89f8a9bb50f5e040b7f95fe6326bad4
+      internalID: 154960990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Beam_Tiny_4
+      rect:
+        serializedVersion: 2
+        x: 453
+        y: 126
+        width: 42
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9e65954e3cf5de499c8d50f363998db
+      internalID: -1636653964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Block_1
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 257
+        width: 84
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6223dc166740ab041bde7aac28daa168
+      internalID: 37959287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Block_2
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 257
+        width: 85
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6b294320eb5cd547b14d889f3e712e5
+      internalID: 248022341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Block_3
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 257
+        width: 85
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 746917ef17b472146858b669548591a7
+      internalID: -340653103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Block_4
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 214
+        width: 84
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cce631eb34e49944c9ee1e1b6d0563a8
+      internalID: 461272853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Square_Medium_3
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 214
+        width: 43
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a38e7cac24ea8d8488fe15721aff67b4
+      internalID: 15677881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Square_Medium_4
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 214
+        width: 42
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5616173d1e0a5fb40b9be597943f32dd
+      internalID: 51786361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Circle_Small_3
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 218
+        width: 40
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9c9af8ea0d826d4395703c8960ac893
+      internalID: 1001186461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Circle_Small_4
+      rect:
+        serializedVersion: 2
+        x: 458
+        y: 218
+        width: 41
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7a14a21eb325a349b8a0caf48c86795
+      internalID: -551891936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Square_Small_4
+      rect:
+        serializedVersion: 2
+        x: 439
+        y: 60
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd5ccac71a5bc654682f6b219fa13d36
+      internalID: -2119124955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Square_Small_1
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 60
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9acf569c3fe254e44a7914d099635221
+      internalID: 196492315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Square_Small_2
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 38
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8def50ab41d87d49a3c67b7e59e7879
+      internalID: 1000108782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Square_Small_3
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 16
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 065e6f254be2aa94e9f5c1123b5abdfc
+      internalID: -776643167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Square_Medium_1
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 3
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35f834a10acf96743b6bf3bf4ce19d8f
+      internalID: 522427388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Circle_Small_1
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 7
+        width: 40
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f130edd10aad94d45a6144be91a84110
+      internalID: -557654125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Square_Medium_2
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 3
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ed5b107d2784c04c8f7a12e085334fc
+      internalID: 1380087201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Circle_Small_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 7
+        width: 40
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3609f6669c267a428fcd46e871d58fd
+      internalID: 258310322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Triangle_Right_1
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 300
+        width: 80
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49e392ba9f7cbea409115e2eb4b5a37c
+      internalID: 1617974910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Triangle_Right_2
+      rect:
+        serializedVersion: 2
+        x: 251
+        y: 300
+        width: 80
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52d8930d2d3f1424381f085fa3fbdc76
+      internalID: -1164576450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Triangle_Right_3
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 300
+        width: 80
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19e37b020ac455744b63733ee56da85b
+      internalID: 880184407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Triangle_Right_4
+      rect:
+        serializedVersion: 2
+        x: 415
+        y: 300
+        width: 80
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43d328a7475bf8448961cd6a62d408c1
+      internalID: -368121522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Triangle_Hollow_1
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 299
+        width: 84
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21c63d343cc7acc469bdd783e8ae1c54
+      internalID: -1960861911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Triangle_Hollow_2
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 215
+        width: 84
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36323a2f3ff4ed94faefc63afb42e7a2
+      internalID: -879159056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Triangle_Hollow_3
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 131
+        width: 84
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a039a54e19b8e34cb6b3888997d193e
+      internalID: 856648267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Triangle_Hollow_4
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 47
+        width: 84
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 994a62ff23ae7b8448b76b4ae6a58315
+      internalID: 495147309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Square_Hollow_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 298
+        width: 84
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: baa5bdb918b4c144da7556eb3b27310f
+      internalID: -1329958388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Square_Hollow_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 214
+        width: 84
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f613aa08e4ebf345bb1c60ef120a278
+      internalID: -2038878709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Square_Hollow_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 130
+        width: 84
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65cb8d0e28101454a906914eb7e53bca
+      internalID: -1197652667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Square_Hollow_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 46
+        width: 84
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1658d17240e262478ce3f4cfe13ec3d
+      internalID: -1176961864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Circle_Large_1
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 225
+        width: 76
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81b2995963992e84484c1ad36e317efb
+      internalID: 1910680684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Circle_Large_2
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 150
+        width: 76
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff706847369cff64e9bea4fb2585920c
+      internalID: 519606436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Circle_Large_3
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 75
+        width: 76
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bfeac27eeaac9d347b75e05adecc4211
+      internalID: 508054159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Circle_Large_4
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 0
+        width: 76
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 029f3cdc47a1d344cadbe106c8b39830
+      internalID: 1221057988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: e87f0aa403ca5f740b017761de49152c
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Stone_Beam_Long_1: -1193441250
+      Stone_Beam_Long_2: 290470433
+      Stone_Beam_Long_3: -378244978
+      Stone_Beam_Long_4: 1637121888
+      Stone_Beam_Medium_1: 349881320
+      Stone_Beam_Medium_2: -1917404864
+      Stone_Beam_Medium_3: -676850750
+      Stone_Beam_Medium_4: -1895582801
+      Stone_Beam_Short_1: 1814605432
+      Stone_Beam_Short_2: 843107926
+      Stone_Beam_Short_3: -367844771
+      Stone_Beam_Short_4: -165435437
+      Stone_Beam_Tiny_1: 1812531313
+      Stone_Beam_Tiny_2: 131219738
+      Stone_Beam_Tiny_3: 154960990
+      Stone_Beam_Tiny_4: -1636653964
+      Stone_Block_1: 37959287
+      Stone_Block_2: 248022341
+      Stone_Block_3: -340653103
+      Stone_Block_4: 461272853
+      Stone_Circle_Large_1: 1910680684
+      Stone_Circle_Large_2: 519606436
+      Stone_Circle_Large_3: 508054159
+      Stone_Circle_Large_4: 1221057988
+      Stone_Circle_Small_1: -557654125
+      Stone_Circle_Small_2: 258310322
+      Stone_Circle_Small_3: 1001186461
+      Stone_Circle_Small_4: -551891936
+      Stone_Square_Hollow_1: -1329958388
+      Stone_Square_Hollow_2: -2038878709
+      Stone_Square_Hollow_3: -1197652667
+      Stone_Square_Hollow_4: -1176961864
+      Stone_Square_Medium_1: 522427388
+      Stone_Square_Medium_2: 1380087201
+      Stone_Square_Medium_3: 15677881
+      Stone_Square_Medium_4: 51786361
+      Stone_Square_Small_1: 196492315
+      Stone_Square_Small_2: 1000108782
+      Stone_Square_Small_3: -776643167
+      Stone_Square_Small_4: -2119124955
+      Stone_Triangle_Hollow_1: -1960861911
+      Stone_Triangle_Hollow_2: -879159056
+      Stone_Triangle_Hollow_3: 856648267
+      Stone_Triangle_Hollow_4: 495147309
+      Stone_Triangle_Right_1: 1617974910
+      Stone_Triangle_Right_2: -1164576450
+      Stone_Triangle_Right_3: 880184407
+      Stone_Triangle_Right_4: -368121522
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

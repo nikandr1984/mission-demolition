@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 // Класс управления рогаткой с системой прицеливания и запуска снарядов
 public class Slingshot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
+    static private Slingshot Instance; // Синглтон
+
     // Настройки рогатки (задаются в инспекторе)
     [Header("Set in Inspector")]
     public GameObject prefabProjectile;  // Префаб снаряда при запуске
@@ -15,6 +17,7 @@ public class Slingshot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public GameObject launchPoint;   // Объект-метка, откуда вылетает снаряд
     public Vector3 launchPos;        // Координаты метки в мире
     public GameObject projectile;    // Созданный снаряд
+    
     public bool aimingMode = false;  // Режима прицеливания (выкл/вкл)
 
     private Rigidbody projectileRigidbody;  // Физика снаряда
@@ -22,9 +25,26 @@ public class Slingshot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     private Camera mainCam;                 // Главная камера (для кеша)
 
    
+    
+    static public Vector3 LaunchPos
+    {
+        get
+        {
+            if (Instance == null)
+            {
+                return Vector3.zero;
+            }
+            return Instance.launchPos;
+        }
+    }
+    
+    
+    
     // Начальная настройка
     void Awake()
     {
+        Instance = this;           // Инициализация синглтона
+
         // Находим и настраиваем точку запуска
         Transform launchPointTrans = transform.Find("LaunchPoint"); 
         launchPoint = launchPointTrans.gameObject;
@@ -128,7 +148,7 @@ public class Slingshot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         projectileRigidbody.linearVelocity = launchVector * velocityMult;
 
         // Камера следит за снарядом
-        FollowCam.POI = projectile;
+        FollowCam.Instance.SetPointOfInterest(projectile);
         
         // Сбрасываем ссылку на снаряд (он теперь управляется физикой)
         projectile = null;            
