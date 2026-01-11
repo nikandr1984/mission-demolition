@@ -1,0 +1,63 @@
+using UnityEngine;
+
+[RequireComponent(typeof(Rigidbody))]
+public class PhysicalProperties : MonoBehaviour
+{
+    [Header("Geometry")]
+    [SerializeField] private float _thickness = 0.2f;        // Толщина объекта
+
+    [Header("Material")]
+    [SerializeField] private BlockMaterials _material;       // Ссылка на ScriptableObject с характеристиками материала
+
+    private Rigidbody _rigidBody;            // Ссылка на Rigidbody компонента
+    private SpriteRenderer _spriteRenderer;  // Ссылка на SpriteRenderer компонента
+
+    public float Mass => _rigidBody.mass;    // Публичное свойство для доступа к массе
+
+    private void Awake()
+    {
+        _rigidBody      = GetComponent<Rigidbody>();       // Кэширование Rigidbody
+        _spriteRenderer = GetComponent<SpriteRenderer>();  // Кэширование SpriteRenderer
+
+        // Проверка наличия BlockMaterials
+        if (_material == null)
+        {
+            Debug.LogWarning($"PhysicalProperties: No material assigned to {name}");
+        }
+
+        CalculateAndApplyMass(); // Вычисление и установка массы
+    }
+
+    private void CalculateAndApplyMass()
+    {
+        float width, height; // Размеры объекта
+
+        // Используем реальный размер спрайта, если есть
+        if (_spriteRenderer != null && _spriteRenderer.sprite != null)
+        {
+            Vector2 spriteSize = _spriteRenderer.sprite.bounds.size;
+            width = spriteSize.x;
+            height = spriteSize.y;
+        }
+        // Подстраховка: используем масштаб трансформы
+        else
+        {
+            Vector3 scale = transform.localScale;
+            width = Mathf.Abs(scale.x);
+            height = Mathf.Abs(scale.y);
+            Debug.Log($"PhysicalProperties: Using transform scale for {name} (no valid SpriteRenderer)");            
+        }
+
+        float volume = width * height * _thickness; // Вычисляем объем
+        float mass = volume * _material.density;    // Вычисляем массу
+
+        // Защита от нулевой или отрицательной массы
+        if (mass <= 0f)
+        {
+            mass = 0.1f; 
+            Debug.LogWarning($"PhysicalProperties: Invalid mass for {name}, using fallback 0.1");
+        }
+
+        _rigidBody.mass = mass; // Применяем массу к Rigidbody
+    }
+}

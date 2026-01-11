@@ -3,12 +3,12 @@ using UnityEngine;
 public class Destructible : MonoBehaviour
 {
     [Header("Material")]
-    [SerializeField] private BlockMaterials _material;       // Ссылка на ScriptableObject с характеристиками материала
+    [SerializeField] private BlockMaterials _material;          // Ссылка на ScriptableObject с характеристиками материала
 
 
-    [Header("Geometry")]
-    [SerializeField] private float _thickness = 0.2f;        // Толщина объекта
-
+    [Header("Physics")]
+    [SerializeField] private PhysicalProperties _physicalProps; // Ссылка на компонент с физическими свойствами
+    
 
     [Header("Behaviour")]
     [SerializeField] private bool _canBeDestroyed = true;    // Флаг, можно ли разрушить объект
@@ -16,38 +16,45 @@ public class Destructible : MonoBehaviour
     [SerializeField] private string _groundTag = "Ground";   // Тег для земли
 
 
-    private Rigidbody _rb;                // Ссылка на Rigidbody компонента
-    private bool _isDestroyed = false;    // Флаг, указывающий, был ли объект уже разрушен
-    private AudioSource _audioSource;     // Ссылка на AudioSource для воспроизведения звуков
-    private float _calculatedMass;        // Вычисленная масса объекта на основе плотности материала
+    private Rigidbody _rigidBody;            // Ссылка на Rigidbody компонента    
+    private AudioSource _audioSource;        // Ссылка на AudioSource для воспроизведения звуков
+
+    private bool _isDestroyed = false;       // Флаг, указывающий, был ли объект уже разрушен   
     
-    private Renderer[] _renderers;        // Массив рендереров объекта
+    
+    private Renderer[] _renderers;           // Массив рендереров объекта
 
 
     private void Awake()
     {
         // Инициализация компонентов
-        _rb = GetComponent<Rigidbody>();
-        _audioSource = GetComponent<AudioSource>();
+        _rigidBody      = GetComponent<Rigidbody>();
+        _audioSource    = GetComponent<AudioSource>();        
 
-        // Проверка наличия необходимых компонентов
-        if (_rb == null)
+        // Проверка наличия Rigidbody
+        if (_rigidBody == null)
         {
             Debug.LogError("Destructible: No Rigidbody found on " + name);
             return;
         }
+
+        // Проверка наличия PhysicalProperties
+        if (_physicalProps == null)
+        {
+            _physicalProps = GetComponent<PhysicalProperties>();
+            if (_physicalProps == null )
+            {
+                Debug.LogError("Destructible: No PhysicalProperties found on " + name);
+            }
+        }
+
 
         // Проверка наличия материала
         if (_material == null)
         {
             Debug.LogWarning("Destructible: No BlockMaterials assigned to " + name);
             return;
-        }
-
-
-        // Вычисление и установка массы объекта
-        CalculateMass();
-        _rb.mass = _calculatedMass;
+        }        
 
 
         // Кэширование рендереров
@@ -59,25 +66,7 @@ public class Destructible : MonoBehaviour
     {
         return (mask.value & (1 << obj.layer)) != 0;
     }
-
-
-    private void CalculateMass()
-    {
-        // Вычисление массы на основе плотности материала и размеров объекта
-        Vector3 scale = transform.localScale; 
-        float width = Mathf.Abs(scale.x);     
-        float height = Mathf.Abs(scale.y);    
-        float volume = width * height * _thickness;
-        _calculatedMass = volume * _material.density;
-
-
-        // Защита от нуля или отрицательной массы
-        if (_calculatedMass <= 0f)
-        {
-            _calculatedMass = 0.1f;
-            Debug.LogWarning("Destructible: Calculated mass <= 0 " + name + ". Using fallback 0.1");
-        } 
-    }
+    
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -103,7 +92,7 @@ public class Destructible : MonoBehaviour
 
             // Расчет урона с учетом массы обоих объектов
             float selfCollisionMult = _material?.selfCollisionDamageMultiplier ?? 0.5f;        
-            damage = impactForce * (other._calculatedMass / _calculatedMass) * otherDamageDealt * selfCollisionMult;
+            damage = impactForce * (other._physicalProps.Mass / _physicalProps.Mass) * otherDamageDealt * selfCollisionMult;
         }
         // 3. Удар о объект из слоев, наносящих урон
         else if (IsInLayerMask(collision.gameObject, _damagingLayers))
@@ -126,8 +115,8 @@ public class Destructible : MonoBehaviour
         if (_isDestroyed) return;     // Защита от повторного разрушения
 
         _isDestroyed = true;          // Установка флага разрушения
-        _rb.isKinematic = true;       // Отключение физики
-        _rb.detectCollisions = false; // Отключение коллизий
+        _rigidBody.isKinematic = true;       // Отключение физики
+        _rigidBody.detectCollisions = false; // Отключение коллизий
 
 
         // Отключение рендереров

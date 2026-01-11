@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5709566897921196246}
   - component: {fileID: 7324646660384402026}
   - component: {fileID: 4026238266942355869}
+  - component: {fileID: 2511820447386116701}
   m_Layer: 6
   m_Name: WoodBeamMedium
   m_TagString: Untagged
@@ -80,8 +81,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1704532091
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 1850033111, guid: 59d85fb38b4d60146affde79becf584a, type: 3}
@@ -101,7 +102,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7329448004687488492}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 160af954eca2a48408903dc8524b4de9, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -155,9 +156,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Destructible
   _material: {fileID: 11400000, guid: 75a6ef8e26df8bb449e7fed7fdcc8a49, type: 2}
-  _thickness: 1
+  _physicalProps: {fileID: 2511820447386116701}
   _canBeDestroyed: 1
   _damagingLayers:
     serializedVersion: 2
     m_Bits: 192
   _groundTag: Ground
+--- !u!114 &2511820447386116701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7329448004687488492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe35d69ac77902f47b78469700a17449, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PhysicalProperties
+  _thickness: 2
+  _material: {fileID: 11400000, guid: 75a6ef8e26df8bb449e7fed7fdcc8a49, type: 2}

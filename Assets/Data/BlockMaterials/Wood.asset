@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wood
   m_EditorClassIdentifier: Assembly-CSharp::BlockMaterials
   density: 0.8
-  damageThreshold: 100
+  damageThreshold: 30
   damageDealt: 4
   selfCollisionDamageMultiplier: 0.5
   externalImpactDamageMultiplier: 1
