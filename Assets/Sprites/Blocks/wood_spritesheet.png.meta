@@ -207,7 +207,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wooden_Triangle_Right_
+      name: Wooden_Triangle_Right_3
       rect:
         serializedVersion: 2
         x: 413
@@ -1212,9 +1212,9 @@ TextureImporter:
       Wooden_Triangle_Hollow_2: 979356250
       Wooden_Triangle_Hollow_3: 223369713
       Wooden_Triangle_Hollow_4: -837172529
-      Wooden_Triangle_Right_: -1282634779
       Wooden_Triangle_Right_1: -1132768369
       Wooden_Triangle_Right_2: 460765475
+      Wooden_Triangle_Right_3: -1282634779
       Wooden_Triangle_Right_4: -1827259530
       wood_spritesheet_0: -1769108210
       wood_spritesheet_28: -234305519

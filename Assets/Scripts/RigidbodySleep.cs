@@ -11,7 +11,5 @@ public class RigidbodySleep : MonoBehaviour
         {
             rb.Sleep(); // Переводим Rigidbody в состояние сна
         }
-    }
-
-    
+    }    
 }
