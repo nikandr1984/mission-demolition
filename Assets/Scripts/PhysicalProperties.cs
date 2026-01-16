@@ -4,10 +4,13 @@ using UnityEngine;
 public class PhysicalProperties : MonoBehaviour
 {
     [Header("Geometry")]
-    [SerializeField] private float _thickness = 0.2f;        // Толщина объекта
+    [SerializeField] private float _thickness = 0.2f;    // Толщина объекта
 
     [Header("Material")]
-    [SerializeField] private BlockMaterials _material;       // Ссылка на ScriptableObject с характеристиками материала
+    [SerializeField] private BlockMaterials _material;   // Ссылка на ScriptableObject с характеристиками материала
+
+    [Header("Physics Initialization")]
+    [SerializeField] private bool _sleepOnStart = true;  // Флаг для установки Rigidbody в состояние сна при старте
 
     private Rigidbody _rigidBody;            // Ссылка на Rigidbody компонента
     private SpriteRenderer _spriteRenderer;  // Ссылка на SpriteRenderer компонента
@@ -16,16 +19,25 @@ public class PhysicalProperties : MonoBehaviour
 
     private void Awake()
     {
-        _rigidBody      = GetComponent<Rigidbody>();       // Кэширование Rigidbody
-        _spriteRenderer = GetComponent<SpriteRenderer>();  // Кэширование SpriteRenderer
+        // 1. Кзширование компонентов        
+        _rigidBody = GetComponent<Rigidbody>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
 
-        // Проверка наличия BlockMaterials
+        // 2. Проверка наличия BlockMaterials
         if (_material == null)
         {
             Debug.LogWarning($"PhysicalProperties: No material assigned to {name}");
         }
 
-        CalculateAndApplyMass(); // Вычисление и установка массы
+        // 3. Вычисление и установка массы
+        CalculateAndApplyMass(); 
+
+        // 4. Установка Rigidbody в состояние сна, если флаг установлен
+        if (_sleepOnStart && _rigidBody != null)
+        {
+            _rigidBody.Sleep();
+        }
+
     }
 
     private void CalculateAndApplyMass()
