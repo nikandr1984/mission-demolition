@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8631509766352414470}
   - component: {fileID: 9055232093493601499}
+  - component: {fileID: 4365749190137674328}
   - component: {fileID: 5556862556463056265}
   - component: {fileID: 5727435586969995121}
   - component: {fileID: 1256519195621824551}
-  - component: {fileID: 4365749190137674328}
   m_Layer: 6
   m_Name: WoodCircleSmall
   m_TagString: Untagged
@@ -95,6 +95,29 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!136 &4365749190137674328
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2048975509720634783}
+  m_Material: {fileID: 13400000, guid: 160af954eca2a48408903dc8524b4de9, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.205
+  m_Height: 3
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &5556862556463056265
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -155,26 +178,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PhysicalProperties
   _thickness: 2
   _material: {fileID: 11400000, guid: 75a6ef8e26df8bb449e7fed7fdcc8a49, type: 2}
---- !u!136 &4365749190137674328
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2048975509720634783}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.205
-  m_Height: 3
-  m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 0}
+  _sleepOnStart: 1

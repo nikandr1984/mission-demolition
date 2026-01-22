@@ -3,7 +3,7 @@ using UnityEngine;
 public class Destructible : MonoBehaviour
 {
     [Header("Material")]
-    [SerializeField] private BlockMaterials _material;          // —сылка на ScriptableObject с характеристиками материала
+    [SerializeField] private DestructibleMaterial _material;          // —сылка на ScriptableObject с характеристиками материала
 
 
     [Header("Physics")]

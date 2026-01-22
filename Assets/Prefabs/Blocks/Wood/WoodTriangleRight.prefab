@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7612744101038380556}
   - component: {fileID: 3617782662735738708}
+  - component: {fileID: 5523468385167062334}
   - component: {fileID: 3476270293887186647}
   - component: {fileID: 2257262222222866465}
   - component: {fileID: 6445899262792335117}
-  - component: {fileID: 5523468385167062334}
   - component: {fileID: 3101869105558276095}
   m_Layer: 6
   m_Name: WoodTriangleRight
@@ -96,6 +96,28 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!64 &5523468385167062334
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7663861982649511398}
+  m_Material: {fileID: 13400000, guid: 160af954eca2a48408903dc8524b4de9, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!54 &3476270293887186647
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -156,28 +178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PhysicalProperties
   _thickness: 2
   _material: {fileID: 11400000, guid: 75a6ef8e26df8bb449e7fed7fdcc8a49, type: 2}
---- !u!64 &5523468385167062334
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7663861982649511398}
-  m_Material: {fileID: 13400000, guid: 160af954eca2a48408903dc8524b4de9, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  _sleepOnStart: 1
 --- !u!114 &3101869105558276095
 MonoBehaviour:
   m_ObjectHideFlags: 0

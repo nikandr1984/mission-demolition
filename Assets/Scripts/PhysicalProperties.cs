@@ -7,7 +7,7 @@ public class PhysicalProperties : MonoBehaviour
     [SerializeField] private float _thickness = 0.2f;    // Толщина объекта
 
     [Header("Material")]
-    [SerializeField] private BlockMaterials _material;   // Ссылка на ScriptableObject с характеристиками материала
+    [SerializeField] private DestructibleMaterial _material;   // Ссылка на ScriptableObject с характеристиками материала
 
     [Header("Physics Initialization")]
     [SerializeField] private bool _sleepOnStart = true;  // Флаг для установки Rigidbody в состояние сна при старте
