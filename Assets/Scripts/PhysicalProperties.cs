@@ -72,4 +72,16 @@ public class PhysicalProperties : MonoBehaviour
 
         _rigidBody.mass = mass; // Применяем массу к Rigidbody
     }
+
+
+#if UNITY_EDITOR
+    // Позволяет Editor-скриптам читать и изменять флаг _sleepOnStart
+    public bool EditorSleepOnStart
+    {
+        get => _sleepOnStart;
+        set => _sleepOnStart = value;
+    }
+#endif
+
+
 }
