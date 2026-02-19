@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 
-public static class SleepOnStartToggleTool
+public static class RigidbodySleepToggleTool
 {
     private static bool _isEnabled = true;
 

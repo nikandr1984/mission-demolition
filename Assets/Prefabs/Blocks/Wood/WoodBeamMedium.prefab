@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1105397799405584265}
   - component: {fileID: 2101266660738870129}
-  - component: {fileID: 5709566897921196246}
-  - component: {fileID: 7324646660384402026}
-  - component: {fileID: 4026238266942355869}
-  - component: {fileID: 2511820447386116701}
+  - component: {fileID: 6980394301123530077}
+  - component: {fileID: 828018439404625736}
+  - component: {fileID: 3339344529517090650}
+  - component: {fileID: 6245078224237750732}
   m_Layer: 6
   m_Name: WoodBeamMedium
   m_TagString: Untagged
@@ -95,14 +95,17 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!65 &5709566897921196246
-BoxCollider:
+--- !u!61 &6980394301123530077
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7329448004687488492}
-  m_Material: {fileID: 13400000, guid: 160af954eca2a48408903dc8524b4de9, type: 2}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -110,40 +113,75 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.66, y: 0.22, z: 3}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &7324646660384402026
-Rigidbody:
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.68, y: 0.22}
+    newSize: {x: 1.69, y: 0.22}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1.68, y: 0.22}
+  m_EdgeRadius: 0
+--- !u!50 &828018439404625736
+Rigidbody2D:
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7329448004687488492}
-  serializedVersion: 5
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDamping: 0.05
+  m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_GravityScale: 1
+  m_Material: {fileID: 6200000, guid: 363d68ef6a7fb3e4d8184c9254111b5b, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 56
+  m_SleepingMode: 1
   m_CollisionDetection: 0
---- !u!114 &4026238266942355869
+  m_Constraints: 0
+--- !u!114 &3339344529517090650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7329448004687488492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe35d69ac77902f47b78469700a17449, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PhysicalProperties
+  _material: {fileID: 11400000, guid: 75a6ef8e26df8bb449e7fed7fdcc8a49, type: 2}
+--- !u!114 &6245078224237750732
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -156,24 +194,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Destructible
   _material: {fileID: 11400000, guid: 75a6ef8e26df8bb449e7fed7fdcc8a49, type: 2}
-  _physicalProps: {fileID: 2511820447386116701}
-  _canBeDestroyed: 1
+  _physicalProps: {fileID: 3339344529517090650}
   _damagingLayers:
     serializedVersion: 2
     m_Bits: 192
   _groundTag: Ground
---- !u!114 &2511820447386116701
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7329448004687488492}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe35d69ac77902f47b78469700a17449, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PhysicalProperties
-  _thickness: 2
-  _material: {fileID: 11400000, guid: 75a6ef8e26df8bb449e7fed7fdcc8a49, type: 2}
-  _sleepOnStart: 0
+  _canBeDestroyed: 1

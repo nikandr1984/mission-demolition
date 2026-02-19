@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e683d5bd59b3e8d45874289d90812c3c, type: 3}
   m_Name: Meat
   m_EditorClassIdentifier: Assembly-CSharp::BlockMaterials
-  density: 0.2
-  damageThreshold: 100
-  damageDealt: 0.5
+  density: 1
+  damageThreshold: 20
+  damageDealt: 1
   selfCollisionDamageMultiplier: 0.2
   externalImpactDamageMultiplier: 1
   breakVFX: {fileID: 0}

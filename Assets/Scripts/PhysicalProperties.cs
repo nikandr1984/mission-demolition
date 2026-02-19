@@ -1,26 +1,22 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class PhysicalProperties : MonoBehaviour
-{
-    [Header("Geometry")]
-    [SerializeField] private float _thickness = 0.2f;    // Толщина объекта
+{   
 
-    [Header("Material")]
-    [SerializeField] private DestructibleMaterial _material;   // Ссылка на ScriptableObject с характеристиками материала
+    
+    [SerializeField] private DestructibleMaterial _material;  // Ссылка на ScriptableObject с характеристиками материала
+    [SerializeField] private bool _rigidbodySleep = true;     // Флаг для сна Rigidbody при старте
 
-    [Header("Physics Initialization")]
-    [SerializeField] private bool _sleepOnStart = true;  // Флаг для установки Rigidbody в состояние сна при старте
-
-    private Rigidbody _rigidBody;            // Ссылка на Rigidbody компонента
+    private Rigidbody2D _rigidBody2D;        // Ссылка на Rigidbody компонента
     private SpriteRenderer _spriteRenderer;  // Ссылка на SpriteRenderer компонента
 
-    public float Mass => _rigidBody.mass;    // Публичное свойство для доступа к массе
+    public float Mass => _rigidBody2D.mass;    // Публичное свойство для доступа к массе
 
     private void Awake()
     {
         // 1. Кзширование компонентов        
-        _rigidBody = GetComponent<Rigidbody>();
+        _rigidBody2D = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
 
         // 2. Проверка наличия BlockMaterials
@@ -29,16 +25,16 @@ public class PhysicalProperties : MonoBehaviour
             Debug.LogWarning($"PhysicalProperties: No material assigned to {name}");
         }
 
-        // 3. Вычисление и установка массы
-        CalculateAndApplyMass(); 
+        // 3. Вычисление и установка массы 
+        CalculateAndApplyMass();
 
-        // 4. Установка Rigidbody в состояние сна, если флаг установлен
-        if (_sleepOnStart && _rigidBody != null)
+        // 4. Установка состояния сна Rigidbody
+        if (_rigidbodySleep && _rigidBody2D != null)
         {
-            _rigidBody.Sleep();
+            _rigidBody2D.sleepMode = RigidbodySleepMode2D.StartAsleep;
         }
-
     }
+
 
     private void CalculateAndApplyMass()
     {
@@ -60,8 +56,8 @@ public class PhysicalProperties : MonoBehaviour
             Debug.Log($"PhysicalProperties: Using transform scale for {name} (no valid SpriteRenderer)");            
         }
 
-        float volume = width * height * _thickness; // Вычисляем объем
-        float mass = volume * _material.density;    // Вычисляем массу
+        float area = width * height;              // Вычисляем объем
+        float mass = area * _material.density;    // Вычисляем массу
 
         // Защита от нулевой или отрицательной массы
         if (mass <= 0f)
@@ -70,18 +66,16 @@ public class PhysicalProperties : MonoBehaviour
             Debug.LogWarning($"PhysicalProperties: Invalid mass for {name}, using fallback 0.1");
         }
 
-        _rigidBody.mass = mass; // Применяем массу к Rigidbody
+        _rigidBody2D.mass = mass; // Применяем массу к Rigidbody
     }
-
 
 #if UNITY_EDITOR
-    // Позволяет Editor-скриптам читать и изменять флаг _sleepOnStart
+    // 
     public bool EditorSleepOnStart
     {
-        get => _sleepOnStart;
-        set => _sleepOnStart = value;
+        get => _rigidbodySleep;
+        set => _rigidbodySleep = value;
     }
 #endif
-
 
 }

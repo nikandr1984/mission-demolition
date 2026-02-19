@@ -2,39 +2,33 @@ using UnityEngine;
 
 public class Destructible : MonoBehaviour
 {
-    [Header("Material")]
-    [SerializeField] private DestructibleMaterial _material;          // Ссылка на ScriptableObject с характеристиками материала
+    // Поля для настройки в инспекторе
+    [SerializeField] private DestructibleMaterial _material;     // Ссылка на ScriptableObject с характеристиками материала    
+    [SerializeField] private PhysicalProperties _physicalProps;  // Ссылка на компонент с физическими свойствами    
+    [SerializeField] private LayerMask _damagingLayers;          // Слои, которые могут наносить урон
+    [SerializeField] private string _groundTag = "Ground";       // Тег для земли
+    [SerializeField] private bool _canBeDestroyed = true;        // Флаг, можно ли разрушить объект
 
 
-    [Header("Physics")]
-    [SerializeField] private PhysicalProperties _physicalProps; // Ссылка на компонент с физическими свойствами
-    
-
-    [Header("Behaviour")]
-    [SerializeField] private bool _canBeDestroyed = true;    // Флаг, можно ли разрушить объект
-    [SerializeField] private LayerMask _damagingLayers;      // Слои, которые могут наносить урон
-    [SerializeField] private string _groundTag = "Ground";   // Тег для земли
-
-
-    private Rigidbody _rigidBody;            // Ссылка на Rigidbody компонента    
+    private Rigidbody2D _rigidBody2D;        // Ссылка на Rigidbody компонента    
     private AudioSource _audioSource;        // Ссылка на AudioSource для воспроизведения звуков
 
-    private bool _isDestroyed = false;       // Флаг, указывающий, был ли объект уже разрушен   
-    
+    private bool _isDestroyed = false;       // Флаг, указывающий, был ли объект уже разрушен     
     
     private Renderer[] _renderers;           // Массив рендереров объекта
+
 
 
     private void Awake()
     {
         // Инициализация компонентов
-        _rigidBody      = GetComponent<Rigidbody>();
-        _audioSource    = GetComponent<AudioSource>();        
+        _rigidBody2D = GetComponent<Rigidbody2D>();
+        _audioSource = GetComponent<AudioSource>();        
 
         // Проверка наличия Rigidbody
-        if (_rigidBody == null)
+        if (_rigidBody2D == null)
         {
-            Debug.LogError("Destructible: No Rigidbody found on " + name);
+            Debug.LogError("Destructible: No Rigidbody2D found on " + name);
             return;
         }
 
@@ -68,16 +62,21 @@ public class Destructible : MonoBehaviour
     }
     
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (_isDestroyed || !_canBeDestroyed) return;     // Если уже разрушен или не может быть разрушен, выходим
-        if (collision.impulse == Vector3.zero) return;   // Если нет импульса, выходим
 
-        float impactForce = collision.impulse.magnitude; // Вычисление силы удара
-        float damage = 0f;                               // Инициализация переменной урона
+        // Получаем величину относительной скорости столкновения
+        float relativeVelocity = collision.relativeVelocity.magnitude;
+        // Рассчитываем силу удара
+        float impactForce = _physicalProps.Mass * relativeVelocity;
+        // Если сила удара нулевая или отрицательная, выходим
+        if (impactForce <= 0f) return;
+        // Инициализаируем переменную урона
+        float damage = 0f;                               
 
 
-        // Определение типа столкновения и расчет урона
+        // Определяем тип столкновения и рассчитываем урон
         // 1. Удар о землю
         if (collision.gameObject.CompareTag(_groundTag))
         {
@@ -112,12 +111,12 @@ public class Destructible : MonoBehaviour
 
     private void DestroyObject() 
     {
-        if (_isDestroyed) return;     // Защита от повторного разрушения
+        if (_isDestroyed) return; // Защита от повторного разрушения
 
-        _isDestroyed = true;          // Установка флага разрушения
-        _rigidBody.isKinematic = true;       // Отключение физики
-        _rigidBody.detectCollisions = false; // Отключение коллизий
+        _isDestroyed = true;      // Установка флага разрушения
 
+        _rigidBody2D.bodyType = RigidbodyType2D.Kinematic; // Отключение физики
+            
 
         // Отключение рендереров
         foreach (Renderer renderer in _renderers)

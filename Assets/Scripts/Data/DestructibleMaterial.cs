@@ -5,7 +5,7 @@ using UnityEngine;
 public class DestructibleMaterial : ScriptableObject
 {
     [Header("Physics")]
-    public float density = 1f;  // Масса для Rigidbody
+    public float density = 1f;  // Плотность для рассчета массы
 
     [Header("Destruction")]    
     public float damageThreshold = 10f;  // Сколько урона выдерживает, прежде чем сломаться
