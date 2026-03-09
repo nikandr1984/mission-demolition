@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1970564826146586916}
   m_Layer: 6
   m_Name: WoodTriangleRight
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

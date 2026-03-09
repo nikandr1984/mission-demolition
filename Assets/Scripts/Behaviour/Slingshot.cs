@@ -3,11 +3,11 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-public class Slingshot2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
+public class Slingshot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
     // Синглтон
-    static private Slingshot2D _instance;            
-    static public Slingshot2D Instance => _instance; 
+    static private Slingshot _instance;            
+    static public Slingshot Instance => _instance; 
 
 
     // Поля для настройки в инспекторе
@@ -29,12 +29,10 @@ public class Slingshot2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     private Camera _mainCam;                     // Главная камера (для кеша) 
 
 
-    // Публичные API
+    // Интерфейсы
     public Vector2 LaunchPos => _launchPos;    // Текущая позиция точки запуска
     public bool AimingMode => _aimingMode;     // Находимся ли в режиме прицеливания
-
-
-    // События
+    
     public static event Action<Rigidbody2D> OnProjectileLaunched; // Событие запуска снаряда
 
 
@@ -56,7 +54,7 @@ public class Slingshot2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         // Проверяем назначение точки запуска в инспекторе
         if (_launchPoint == null)
         {
-            Debug.LogError("Slingshot2D: Launch Point is not assigned in the inspector!");
+            Debug.LogError("Slingshot: Launch Point is not assigned in the inspector!");
             return;
         }
 
@@ -70,7 +68,7 @@ public class Slingshot2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
         if (_slingCollider == null) // Если нет коллайдера на рогатке
         {
-            Debug.LogError("Slingshot2D: Missing CircleCollider2D component!");
+            Debug.LogError("Slingshot: Missing CircleCollider2D component!");
             enabled = false; // Отключаем компонент
             return;
         }
@@ -115,23 +113,17 @@ public class Slingshot2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     // Обработчики событий курсора и нажатий
     public void OnPointerEnter(PointerEventData eventData)
-    {
-        Debug.Log("Slingshot2D: Cursor ENTERED slingshot collider");
-
+    {  
         _launchPoint.SetActive(true); // Показать точку запуска
     }
 
     public void OnPointerExit(PointerEventData eventData)
-    {
-        Debug.Log("Slingshot2D: Cursor LEFT slingshot collider");
-
+    {        
         _launchPoint.SetActive(false); // Скрыть точку запуска
     }
 
     public void OnPointerDown(PointerEventData eventData)
-    {
-        Debug.Log("Slingshot2D: LMB is PRESSED");
-
+    { 
         if (eventData.button != PointerEventData.InputButton.Left) return; // Если не левая кнопка, выходим
 
         _aimingMode = true;           // Включаем режим прицеливания  
@@ -152,9 +144,7 @@ public class Slingshot2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     }
 
     public void OnPointerUp(PointerEventData eventData)
-    {
-        Debug.Log("Slingshot2D: LMB is RELEASED");
-
+    {        
         if (_aimingMode)        // Если в режиме прицеливания
         {
             LaunchProjectile(); // Запускаем снаряд

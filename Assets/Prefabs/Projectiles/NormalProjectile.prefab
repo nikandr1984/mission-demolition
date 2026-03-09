@@ -169,3 +169,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39a8f35e9fc6fbb4486cb7fcff395d99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectailBehaviour
+  _stopVelocityThreshold: 0.3
+  _timeToDestroyAfterStop: 4

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 590568500975758975}
   m_Layer: 6
   m_Name: WoodSquareMedium
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -181,6 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PhysicalProperties
   _material: {fileID: 11400000, guid: 75a6ef8e26df8bb449e7fed7fdcc8a49, type: 2}
+  _rigidbodySleep: 1
 --- !u!114 &590568500975758975
 MonoBehaviour:
   m_ObjectHideFlags: 0

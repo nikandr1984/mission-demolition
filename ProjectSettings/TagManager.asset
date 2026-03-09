@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Projectile
   - Ground
+  - Target
+  - Block
+  - LevelBoundary
   layers:
   - Default
   - TransparentFX

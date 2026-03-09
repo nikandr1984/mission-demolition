@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Destructible : MonoBehaviour
@@ -9,13 +10,16 @@ public class Destructible : MonoBehaviour
     [SerializeField] private string _groundTag = "Ground";       // Тег для земли
     [SerializeField] private bool _canBeDestroyed = true;        // Флаг, можно ли разрушить объект
 
+    // Внутреннее состояние
+    private bool _isDestroyed = false;       // Флаг, указывающий, был ли объект уже разрушен 
+    private Renderer[] _renderers;           // Массив рендереров объекта
 
+    // Кэшируемые компоненты
     private Rigidbody2D _rigidBody2D;        // Ссылка на Rigidbody компонента    
     private AudioSource _audioSource;        // Ссылка на AudioSource для воспроизведения звуков
 
-    private bool _isDestroyed = false;       // Флаг, указывающий, был ли объект уже разрушен     
-    
-    private Renderer[] _renderers;           // Массив рендереров объекта
+    // Публичные API
+    public static event Action<Rigidbody2D> OnTargetDestroyed; // Событие разрушения объекта (можно расширить с параметрами)
 
 
 
@@ -114,6 +118,14 @@ public class Destructible : MonoBehaviour
         if (_isDestroyed) return; // Защита от повторного разрушения
 
         _isDestroyed = true;      // Установка флага разрушения
+
+        
+        if (gameObject.CompareTag("Target")) // Если это Цель, оповещаем
+        {
+            OnTargetDestroyed?.Invoke(_rigidBody2D);
+            Debug.Log("Destructible: Target destroyed - " + name);
+        }
+
 
         _rigidBody2D.bodyType = RigidbodyType2D.Kinematic; // Отключение физики
             

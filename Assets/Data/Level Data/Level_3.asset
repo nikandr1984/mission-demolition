@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a81cffaad849ee40bedfa4f93d4ebec, type: 3}
+  m_Name: Level_3
+  m_EditorClassIdentifier: Assembly-CSharp::LevelData
+  levelNumber: 3
+  levelName: Level 3
+  castlePrefab: {fileID: 6128504512096550385, guid: 6e95d02323a03d04abcdb9a9f3b119b3, type: 3}
+  castleSpawnPosition: {x: 0, y: 0, z: 0}
+  projectileCount: 4
+  nextLevelData: {fileID: 0}
+  backgroundSprite: {fileID: 0}
