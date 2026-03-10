@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -24,11 +25,13 @@ public class FollowCam : MonoBehaviour
     private bool _shouldRealiseProjectile = false;   // Флаг состояния снаряда
     private bool _isViewingLevel = false;            // Флаг для отслеживания, находится ли камера в обзорной позиции
 
-
+    // Кэшируемые компоненты
     private Camera _mainCamera;                      // Ссылка на основную камеру
     private GameObject _trackingObject;              // Объект, за которым следует камера
     private Rigidbody2D _trackedRigidbody2D;         // Физика объекта, за которым следует камера
 
+    // Интерфейсы
+    public static event Action OnViewPosition;       // Событие о переключении в обзорную позицию
 
 
 
@@ -137,8 +140,10 @@ public class FollowCam : MonoBehaviour
 
 
     public void MoveToViewPosition() // Метод для перемещения камеры к обзорной позиции уровня
-    {        
+    {      
         _isViewingLevel = !_isViewingLevel;
+        OnViewPosition?.Invoke();
+        Debug.Log("FollowCam: Toggled view position. Now viewing level: " + _isViewingLevel); 
     }
 
 

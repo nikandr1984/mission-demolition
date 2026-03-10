@@ -20,7 +20,7 @@ public class Slingshot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     private Vector2 _launchPos;                  // Позиция точки запуска                                            
     private GameObject _projectile;              // Созданный снаряд
     private Rigidbody2D _projectileRigidbody2D;  // Физика снаряда
-    private bool _aimingMode = false;            // Режим прицеливания (выкл/вкл)
+    private bool _aimingMode = true;             // Режим прицеливания (выкл/вкл)
 
 
     // Кэшируемые компоненты    
@@ -36,6 +36,20 @@ public class Slingshot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public static event Action<Rigidbody2D> OnProjectileLaunched; // Событие запуска снаряда
 
 
+
+
+    
+    private void OnEnable()
+    {
+        FollowCam.OnViewPosition += AimModeToggle; // Подписываемся на событие изменения позиции камеры
+        Debug.Log("Slingshot: Subscribed to FollowCam.OnViewPosition event.");
+    }
+
+
+    private void OnDisable()
+    {
+        FollowCam.OnViewPosition -= AimModeToggle; // Отписываемся от события изменения позиции камеры
+    }
 
 
     private void Awake()
@@ -78,7 +92,7 @@ public class Slingshot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     private void Update()
     {
-        if (!_aimingMode || _projectile == null) return; // Если не в режиме прицеливания или снаряд не создан, выходим
+        if (_projectile == null) return;                 // Если снаряд не создан, выходим
 
         Vector2 mousePos = GetMouseWorldPos();           // Получаем позицию мыши в мировых координатах
         
@@ -113,7 +127,7 @@ public class Slingshot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     // Обработчики событий курсора и нажатий
     public void OnPointerEnter(PointerEventData eventData)
-    {  
+    {          
         _launchPoint.SetActive(true); // Показать точку запуска
     }
 
@@ -123,24 +137,32 @@ public class Slingshot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     }
 
     public void OnPointerDown(PointerEventData eventData)
-    { 
-        if (eventData.button != PointerEventData.InputButton.Left) return; // Если не левая кнопка, выходим
+    {
+        // 1. Если не в режиме прицеливания, выходим
+        if (!_aimingMode) return;
 
-        _aimingMode = true;           // Включаем режим прицеливания  
-        _launchPoint.SetActive(true); // Показываем точку запуска
+        // 2. Если не левая кнопка, выходим
+        if (eventData.button != PointerEventData.InputButton.Left) return;
 
-        _projectile = Instantiate(_prefabProjectile, _launchPos, Quaternion.identity); // Создаем снаряд в точке запуска
+        // 3. Показываем точку запуска
+        _launchPoint.SetActive(true);
 
-        _projectileRigidbody2D = _projectile.GetComponent<Rigidbody2D>();   // Получаем компонент Rigidbody2D снаряда
+        // 4. Создаем снаряд в точке запуска
+        _projectile = Instantiate(_prefabProjectile, _launchPos, Quaternion.identity);
 
-        if (_projectileRigidbody2D == null) // Проверяем наличие Rigidbody2D
+        // 5. Получаем компонент Rigidbody2D снаряда
+        _projectileRigidbody2D = _projectile.GetComponent<Rigidbody2D>();
+
+        // 6. Проверяем наличие Rigidbody2D
+        if (_projectileRigidbody2D == null) 
         {
             Debug.LogError("Slingshot2D: Projectile prefab must have a Rigidbody2D!");
             CancelAim();
             return;
         }
 
-        _projectileRigidbody2D.bodyType = RigidbodyType2D.Kinematic; // Делаем снаряд кинематическим на время прицеливания
+        // 7. Делаем снаряд кинематическим на время прицеливания
+        _projectileRigidbody2D.bodyType = RigidbodyType2D.Kinematic; 
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -189,5 +211,11 @@ public class Slingshot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
             _projectile = null;            // Сбрасываем ссылку на снаряд
             _projectileRigidbody2D = null; // Сбрасываем ссылку на Rigidbody2D
         }
+    }
+
+    private void AimModeToggle()
+    {
+        _aimingMode = !_aimingMode;
+        Debug.Log("Slingshot: Aim mode toggled. Current state: " + (_aimingMode ? "ON" : "OFF"));
     }
 }

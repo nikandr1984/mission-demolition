@@ -1,6 +1,55 @@
 {
-    "name": "InputSystem_Actions",
+    "version": 1,
+    "name": "GameInputActions",
     "maps": [
+        {
+            "name": "Gameplay",
+            "id": "0230341e-473a-4edf-beab-c60410850407",
+            "actions": [
+                {
+                    "name": "AimPosition",
+                    "type": "Value",
+                    "id": "73630377-558b-4f19-9ec0-7cfc14102774",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Fire",
+                    "type": "Button",
+                    "id": "aadf46ae-7ba1-41a4-945c-5dbf19d92b2c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "8ab957f6-991b-43e4-bebd-ed3f24aeb60f",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AimPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "68d3f10d-a3fb-4779-90fd-b92371460d7a",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
         {
             "name": "Player",
             "id": "df70fa95-8a34-4494-b137-73ab6b9c7d37",
