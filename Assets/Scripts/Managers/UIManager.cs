@@ -1,38 +1,45 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System;
 
 
 public class UIManager : MonoBehaviour
 {
     // Поля для настройки в инспекторе     
-    [SerializeField] private LevelData _currentLevelData;            // Текущие данные уровня
     [SerializeField] private Transform _projectaleIconsContainer;    // Контейнер для иконок снарядов
     [SerializeField] private Image _projectileIconPrefab;            // Префаб иконки снаряда
+    [SerializeField] private GameObject _victoryPanel;               // Панель победы
+    [SerializeField] private GameObject _defeatPanel;                // Панель поражения
 
 
     // Внутреннее состояние
     private int _projectilesRemaining = 0;                       // Количество оставшихся снарядов
-    private readonly List<Image> _activeProjectileIcons = new(); // Список активных иконок снарядов    
+    private readonly List<Image> _activeProjectileIcons = new(); // Список активных иконок снарядов
+                                                                  
+
+    // События
+    public static event Action OnViewButtonClicked; // Событие, когда игрок нажимает на кнопку Обзор
 
 
 
     private void OnEnable()
     {
-        Slingshot.OnProjectileLaunched += HandleProjectileLaunched;             
+        Slingshot_New.OnProjectileLaunched += HandleProjectileLaunched;
+        GameManager.OnVictory += HandleVictory;
+        GameManager.OnDefeat += HandleDefeat;
+        GameManager.OnStartLevel += HandleStartLevel;
+        
     }
 
     private void OnDisable()
     {
-        Slingshot.OnProjectileLaunched -= HandleProjectileLaunched;                
+        Slingshot_New.OnProjectileLaunched -= HandleProjectileLaunched;
+        GameManager.OnVictory -= HandleVictory;
+        GameManager.OnDefeat -= HandleDefeat;
+        GameManager.OnStartLevel -= HandleStartLevel;
     }
-
-
-    private void Start()
-    {
-        InitializeUI(_currentLevelData); // Инициализируем UI для текущего уровня
-    }
-
+     
 
 
     // Инициализация UI элементов для нового уровня
@@ -96,24 +103,55 @@ public class UIManager : MonoBehaviour
 
     }
 
-
-    private void ClearAllIcons()
+    private void HandleVictory()
     {
-        foreach (var icon in _activeProjectileIcons)
+        // 1. Показываем панель победы
+        if (_victoryPanel != null)
         {
-            if (icon != null)
-            {
-                Destroy(icon.gameObject);
-            }
-            _activeProjectileIcons.Clear();
-
+            _victoryPanel.SetActive(true);
         }
     }
 
 
-    private void InitializeUINextLevel(LevelData levelData)
+    private void HandleDefeat()
     {
-        
+        // 1. Показываем панель проигрыша
+        if (_defeatPanel != null) _defeatPanel.SetActive(true);        
     }
 
+    private void HandleStartLevel(LevelData levelData)
+    {
+        // 1. Инициализируем UI
+        InitializeUI(levelData);
+        
+        // 2. Деактивируем панели, если они открыты
+        if (_victoryPanel != null) _victoryPanel.SetActive(false);
+        if (_defeatPanel != null) _defeatPanel.SetActive(false);
+    }
+
+   
+
+
+    private void ClearAllIcons()
+    {
+        for (int i = _activeProjectileIcons.Count - 1; i >=0; i--)
+        {
+            Image icon = _activeProjectileIcons[i];
+
+            if (icon != null) Destroy(icon.gameObject);
+
+            _activeProjectileIcons.RemoveAt(i);
+        }
+    }
+         
+    
+
+    public void ViewButtonClicked()
+    {
+        if(Slingshot_New.Instance.IsIdled)
+        {
+            OnViewButtonClicked?.Invoke();
+            Debug.Log("UIManager: Игрок кликнул на кнопку Обзор (рогатка в режиме ожидания)");
+        }        
+    }
 }

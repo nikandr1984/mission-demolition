@@ -2,7 +2,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class ProjectailBehaviour : MonoBehaviour
+public class ProjectaileBehaviour : MonoBehaviour
 {
     // Поля для настройки в инспекторе
     [SerializeField] private float _stopVelocityThreshold = 0.15f; // Пороговая скорость для определения остановки снаряда
@@ -15,7 +15,7 @@ public class ProjectailBehaviour : MonoBehaviour
     // Кэшируемые компоненты
     private Rigidbody2D _projectileRb;
 
-    // Публичные API
+    // События
     public static event System.Action<Rigidbody2D> OnProjectailCollision;
     public static event System.Action OnProjectailDestroyed;
 
@@ -26,6 +26,17 @@ public class ProjectailBehaviour : MonoBehaviour
     {
         _projectileRb = GetComponent<Rigidbody2D>();
     }
+
+    private void OnEnable()
+    {
+        GameManager.OnStartLevel += HandleStartLevel;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.OnStartLevel -= HandleStartLevel;
+    }
+
 
 
     private void FixedUpdate()
@@ -98,6 +109,13 @@ public class ProjectailBehaviour : MonoBehaviour
         Destroy(gameObject);
         OnProjectailDestroyed?.Invoke();
     }
+
+
+    private void HandleStartLevel(LevelData levelData)
+    {
+        DestroyProjectile();
+    }
+
 
 
     // Метод для очистки корутины при уничтожении объекта

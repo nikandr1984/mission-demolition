@@ -27,13 +27,13 @@ public class ProjectileTrail : MonoBehaviour
     private void OnEnable()
     {
         Slingshot.OnProjectileLaunched += OnProjectileLaunched;            // Подписываемся на событие запуска снаряда
-        ProjectailBehaviour.OnProjectailCollision += OnProjectailCollision;  // Подписываемся на событие столкновения снаряда
+        ProjectaileBehaviour.OnProjectailCollision += OnProjectailCollision;  // Подписываемся на событие столкновения снаряда
     }
 
     private void OnDisable()
     {
         Slingshot.OnProjectileLaunched -= OnProjectileLaunched;            // Отписываемся от события
-        ProjectailBehaviour.OnProjectailCollision -= OnProjectailCollision;  // Отписываемся от события
+        ProjectaileBehaviour.OnProjectailCollision -= OnProjectailCollision;  // Отписываемся от события
 
     }
 

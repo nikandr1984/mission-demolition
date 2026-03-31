@@ -15,7 +15,8 @@ MonoBehaviour:
   levelNumber: 3
   levelName: Level 3
   castlePrefab: {fileID: 6128504512096550385, guid: 6e95d02323a03d04abcdb9a9f3b119b3, type: 3}
-  castleSpawnPosition: {x: 0, y: 0, z: 0}
-  projectileCount: 4
+  castleSpawnPosition: {x: 60, y: 5.0918, z: 0}
+  projectileCount: 3
+  targetCount: 3
   nextLevelData: {fileID: 0}
   backgroundSprite: {fileID: 0}

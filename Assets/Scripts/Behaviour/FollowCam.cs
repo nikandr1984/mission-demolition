@@ -9,7 +9,6 @@ public class FollowCam : MonoBehaviour
     // Поля для настройки в инспекторе
     [SerializeField] private float _easing = 0.05f;                         // Коэффициент сглаживания камеры
     [SerializeField] private float _orthoSizeOffset = 10f;                  // Базовый размер ортографической камеры
-    [SerializeField] private float _viewOrthoSize = 15f;                    // Размер камеры при обзоре уровня
     [SerializeField] private float _camZ = -10f;                            // Желаемая координата Z камеры (глубина)
 
     [SerializeField] private float _leftBound = 5f;                         // Левая граница уровня
@@ -23,7 +22,7 @@ public class FollowCam : MonoBehaviour
     
     // Внутреннее состояние    
     private bool _shouldRealiseProjectile = false;   // Флаг состояния снаряда
-    private bool _isViewingLevel = false;            // Флаг для отслеживания, находится ли камера в обзорной позиции
+    private bool _isViewMode = false;                // Флаг для отслеживания, находится ли камера в обзорной позиции
 
     // Кэшируемые компоненты
     private Camera _mainCamera;                      // Ссылка на основную камеру
@@ -31,20 +30,23 @@ public class FollowCam : MonoBehaviour
     private Rigidbody2D _trackedRigidbody2D;         // Физика объекта, за которым следует камера
 
     // Интерфейсы
-    public static event Action OnViewPosition;       // Событие о переключении в обзорную позицию
+    public event Action<bool> OnViewModeChanged;    // Событие о переключении в обзорную позицию
+    
 
 
 
     private void OnEnable()
     {
-        Slingshot.OnProjectileLaunched += HandleProjectailLaunched; // Подписываемся на событие запуска снаряда        
+        Slingshot_New.OnProjectileLaunched += HandleProjectailLaunched; // Подписываемся на событие запуска снаряда
+        UIManager.OnViewButtonClicked += MoveToViewPosition;            // Подписываемся на события клика кнопки Обзора                                                                 
     }
 
 
 
     private void OnDisable()
     {
-        Slingshot.OnProjectileLaunched -= HandleProjectailLaunched; // Отписываемся от события при отключении
+        Slingshot_New.OnProjectileLaunched -= HandleProjectailLaunched; // Отписываемся от события запуска снаряда
+        UIManager.OnViewButtonClicked -= MoveToViewPosition;
     }
 
 
@@ -111,7 +113,7 @@ public class FollowCam : MonoBehaviour
              
         }
         
-        else if (_trackingObject == null && _isViewingLevel) // Если осматриваем уровень
+        else if (_trackingObject == null && _isViewMode) // Если осматриваем уровень
         {
             destination = new Vector3(_viewPosition.x, _viewPosition.y, _camZ);            
         }
@@ -139,11 +141,11 @@ public class FollowCam : MonoBehaviour
     }
 
 
-    public void MoveToViewPosition() // Метод для перемещения камеры к обзорной позиции уровня
+    private void MoveToViewPosition() // Метод для перемещения камеры к обзорной позиции уровня
     {      
-        _isViewingLevel = !_isViewingLevel;
-        OnViewPosition?.Invoke();
-        Debug.Log("FollowCam: Toggled view position. Now viewing level: " + _isViewingLevel); 
+        _isViewMode = !_isViewMode;
+        OnViewModeChanged?.Invoke(_isViewMode);
+        Debug.Log("FollowCam: Toggled view position."); 
     }
 
 

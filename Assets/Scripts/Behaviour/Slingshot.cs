@@ -41,14 +41,14 @@ public class Slingshot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     
     private void OnEnable()
     {
-        FollowCam.OnViewPosition += AimModeToggle; // Подписываемся на событие изменения позиции камеры
+        FollowCam.Instance.OnViewModeChanged += AimModeToggle; // Подписываемся на событие изменения позиции камеры
         Debug.Log("Slingshot: Subscribed to FollowCam.OnViewPosition event.");
     }
 
 
     private void OnDisable()
     {
-        FollowCam.OnViewPosition -= AimModeToggle; // Отписываемся от события изменения позиции камеры
+        FollowCam.Instance.OnViewModeChanged -= AimModeToggle; // Отписываемся от события изменения позиции камеры
     }
 
 
@@ -213,7 +213,7 @@ public class Slingshot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         }
     }
 
-    private void AimModeToggle()
+    private void AimModeToggle(bool _aimingMode)
     {
         _aimingMode = !_aimingMode;
         Debug.Log("Slingshot: Aim mode toggled. Current state: " + (_aimingMode ? "ON" : "OFF"));

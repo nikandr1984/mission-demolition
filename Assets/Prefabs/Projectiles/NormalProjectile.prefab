@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8855550874718940784}
   - component: {fileID: 750053647005531534}
   - component: {fileID: 4256708620753535692}
-  - component: {fileID: 4754736586291352255}
+  - component: {fileID: 7639104711068032548}
   m_Layer: 0
   m_Name: NormalProjectile
   m_TagString: Projectile
@@ -143,8 +143,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 3
-  m_LinearDamping: 0.05
-  m_AngularDamping: 0.8
+  m_LinearDamping: 0.1
+  m_AngularDamping: 2
   m_GravityScale: 1
   m_Material: {fileID: 6200000, guid: 7837b565416a3af4d8e940ff9b55e509, type: 2}
   m_IncludeLayers:
@@ -157,7 +157,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &4754736586291352255
+--- !u!114 &7639104711068032548
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -166,8 +166,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 3554777383529942435}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39a8f35e9fc6fbb4486cb7fcff395d99, type: 3}
+  m_Script: {fileID: 11500000, guid: 76721e24a3dd17d4f841e5e31f7a85dc, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ProjectailBehaviour
-  _stopVelocityThreshold: 0.3
-  _timeToDestroyAfterStop: 4
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectaileBehaviour
+  _stopVelocityThreshold: 0.15
+  _timeToDestroyAfterStop: 3

@@ -18,7 +18,7 @@ public class Destructible : MonoBehaviour
     private Rigidbody2D _rigidBody2D;        // Ссылка на Rigidbody компонента    
     private AudioSource _audioSource;        // Ссылка на AudioSource для воспроизведения звуков
 
-    // Публичные API
+    // События
     public static event Action<Rigidbody2D> OnTargetDestroyed; // Событие разрушения объекта (можно расширить с параметрами)
 
 
@@ -122,8 +122,7 @@ public class Destructible : MonoBehaviour
         
         if (gameObject.CompareTag("Target")) // Если это Цель, оповещаем
         {
-            OnTargetDestroyed?.Invoke(_rigidBody2D);
-            Debug.Log("Destructible: Target destroyed - " + name);
+            OnTargetDestroyed?.Invoke(_rigidBody2D);            
         }
 
 

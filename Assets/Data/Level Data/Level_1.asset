@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   levelNumber: 1
   levelName: Level 1
-  castlePrefab: {fileID: 6128504512096550385, guid: 6e95d02323a03d04abcdb9a9f3b119b3, type: 3}
+  castlePrefab: {fileID: 149875518065957301, guid: ebaac8f5e4accad4e8204672091de093, type: 3}
   castleSpawnPosition: {x: 60, y: 5.0918, z: 0}
-  projectileCount: 2
+  projectileCount: 1
+  targetCount: 1
   nextLevelData: {fileID: 11400000, guid: 19bdc2264e192ce4484b32e7535d520e, type: 2}
   backgroundSprite: {fileID: 0}
