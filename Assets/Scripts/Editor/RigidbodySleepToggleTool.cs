@@ -10,8 +10,8 @@ public static class RigidbodySleepToggleTool
     private static void ToggleSleepOnStart()
     {
         // Находим все объекты с компонентом PhysicalProperties в сцене
-        var physicalProps = Object.FindObjectsByType<PhysicalProperties>(FindObjectsSortMode.None);
-
+        //var physicalProps = Object.FindObjectsByType<PhysicalProperties>(FindObjectsSortMode.None);
+        PhysicalProperties[] physicalProps = Object.FindObjectsByType<PhysicalProperties>();
 
         // Проверяем, есть ли такие объекты
         if (physicalProps == null || physicalProps.Length == 0)

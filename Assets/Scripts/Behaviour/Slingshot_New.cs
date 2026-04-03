@@ -116,9 +116,10 @@ public class Slingshot_New : MonoBehaviour
         // 3. Если курсор не над зоной рогатки - игнорируем ввод
         if (!_isCursorOverSlingshot) return;
 
-        
+        // 4. Если GameManager говорит, что игра не активна - игнорируем ввод
+        if (GameManager.Instance != null && !GameManager.Instance.IsGameActive) return;
                 
-        // 4. Начинаем прицеливание
+        // 5. Начинаем прицеливание
         StartAiming();
     }
 

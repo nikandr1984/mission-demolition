@@ -3,11 +3,23 @@ using System.Collections.Generic;
 
 public class ProjectileTrail : MonoBehaviour
 {
-    [SerializeField] private float _minDistance = 0.1f;    // Минимальное расстояние между точками    
+    // Поля для настройки в инспекторе
+    [SerializeField] private float _minDistance = 0.1f;       // Мин. расстояние между точками
+    [SerializeField] private float _minTravelDistance = 0.3f; // Мин. расстояние, после которго коллиззии считаются валидными
+    [SerializeField] private float _launchGraceTime = 0.15f;  // Время невидимости для коллизии после запуска снаряда 
 
-    private LineRenderer _lineRenderer;                    // Ссылка на компонент LineRenderer
+    // Внутреннее состояние    
     private List<Vector3> _points = new List<Vector3>();   // Список точек линии
-    private Rigidbody2D _targetRigidbody;                  // Цель, к которой будет привязан след 
+    private bool _isTracking = false;                      // Фдаг для отслеживания состояния следа
+    private float _launchTimestamp = 0f;                   // Время запуска снаряда
+    private Vector3 _launchPosition;                       // Позиция запуска снаряда
+
+
+    // Кэшируемые компоненты и ссылки
+    private LineRenderer _lineRenderer;                    // Ссылка на компонент LineRenderer
+    private Rigidbody2D _targetRigidbody;                  // Цель, к которой будет привязан след
+
+
 
 
 
@@ -26,46 +38,58 @@ public class ProjectileTrail : MonoBehaviour
 
     private void OnEnable()
     {
-        Slingshot.OnProjectileLaunched += OnProjectileLaunched;            // Подписываемся на событие запуска снаряда
-        ProjectaileBehaviour.OnProjectailCollision += OnProjectailCollision;  // Подписываемся на событие столкновения снаряда
+        Slingshot_New.OnProjectileLaunched += HeandlerProjectileLaunched;           // Подписываемся на событие запуска снаряда
+        ProjectaileBehaviour.OnProjectailCollision += HeandlerProjectailCollision;  // Подписываемся на событие столкновения снаряда
+        GameManager.OnStartLevel += HeandlerStartLevel;                       // Подписываемся на событие старта уровня 
     }
 
     private void OnDisable()
     {
-        Slingshot.OnProjectileLaunched -= OnProjectileLaunched;            // Отписываемся от события
-        ProjectaileBehaviour.OnProjectailCollision -= OnProjectailCollision;  // Отписываемся от события
+        Slingshot_New.OnProjectileLaunched -= HeandlerProjectileLaunched;               
+        ProjectaileBehaviour.OnProjectailCollision -= HeandlerProjectailCollision;
+        GameManager.OnStartLevel -= HeandlerStartLevel;
 
     }
 
 
-    private void OnProjectileLaunched(Rigidbody2D projectileRb)
+    private void HeandlerProjectileLaunched(Rigidbody2D projectileRb)
     {
-        if (_targetRigidbody != null) // Если уже есть активный снаряд, то очищаем след
-        {
-            ClearTrail();
-        }          
+        // 1. Очищаем предыдущий след
+        ClearTrail();
+        
+        // 2. Включаем режим отслеживания
+        _isTracking = true;
 
+        // 3. Начинаем отслеживать новый снаряд
         StartTrail(projectileRb);
     }
 
 
-    private void OnProjectailCollision(Rigidbody2D projectileRb)
+    private void HeandlerProjectailCollision(Rigidbody2D projectileRb)
     {
-        if (_targetRigidbody == projectileRb) // Проверяем, что столкновение произошло с нашим снарядом
-        {
-            FinishTrail(); // Завершаем след при столкновении
-        }
+        // 1. Если коллизия не нашего снаряда - игнорируем 
+        if (_targetRigidbody != projectileRb) return;
+
+        // 2. Игнорируем коллизию, если прошло недостаточно времени со старта
+        float timeSinceLaunch = Time.time - _launchTimestamp;
+        if (timeSinceLaunch < _launchGraceTime) return;
+
+        // 3. Игнорируем коллизию, если снаряд пролетел недостаточное расстояние со старта
+        float travelDistance = Vector3.Distance(_launchPosition, _targetRigidbody.position);
+        if (travelDistance < _minTravelDistance) return;
+
+        // 4. Оканчиваем след, так как коллизия считается валидной
+        FinishTrail();
     }
 
 
     private void FixedUpdate()
     {
-        if (_targetRigidbody == null || _targetRigidbody.gameObject == null) // Если снаряда нет, то выходим
-        {
-            return;
-        }
+        // 1. Если мы не в режиме отслеживания или цель для следа не установлена - выходим
+        if (!_isTracking || _targetRigidbody == null) return;
 
-        AddPoint(_targetRigidbody.position); // Добавляем текущую позицию снаряда в след
+        // 2. Добавляем текущую позицию снаряда в след
+        AddPoint(_targetRigidbody.position); 
     }
 
 
@@ -73,14 +97,25 @@ public class ProjectileTrail : MonoBehaviour
 
     private void StartTrail(Rigidbody2D projectileRb) // Метод для начала отслеживания снаряда
     {
-        _targetRigidbody = projectileRb; // Сохраняем ссылку на Rigidbody2D снаряда
-        if (_targetRigidbody == null)    // Проверочка на null
+        // 1. Присваиваем ссылку - поле тепер смотри на новый объект
+        _targetRigidbody = projectileRb;
+
+        // 2. Проверяем, что ссылка не null, иначе выводим ошибку и выходим
+        if (_targetRigidbody == null)   
         {
             Debug.LogError("ProjectileTrail: Received null Rigidbody2D in StartTraking");
             return;
         }
-        _lineRenderer.enabled = true;        // Включаем LineRenderer для отображения следа
-        AddPoint(_targetRigidbody.position); // Добавляем первую точку в след
+
+        // 3. Записываем момент запуска и стартовую позицию для грейс-периода
+        _launchTimestamp = Time.time;
+        _launchPosition = _targetRigidbody.position;
+
+        // 4. Включаем LineRenderer для отображения следа
+        _lineRenderer.enabled = true;
+
+        // 5. Добавляем первую точку в след
+        AddPoint(_targetRigidbody.position); 
     }
 
 
@@ -102,7 +137,11 @@ public class ProjectileTrail : MonoBehaviour
 
     private void FinishTrail()
     {
-        enabled = false; // Отключаем скрипт, чтобы прекратить обновление следа        
+        // 1. Выключаем режим отслеживания
+        _isTracking = false;
+
+        // 2. Обнуляем ссылке на отслеживаемый Rigidbody2D
+        _targetRigidbody = null;
     }
 
 
@@ -112,6 +151,15 @@ public class ProjectileTrail : MonoBehaviour
         _lineRenderer.positionCount = 0;  // Сбрасываем количество точек в LineRenderer
         _lineRenderer.enabled = false;    // Отключаем LineRenderer
         _targetRigidbody = null;          // Сбрасываем ссылку на Rigidbody2D
-    }   
+        _isTracking = false;              // Сбрасываем флаг отслеживания
+        _launchTimestamp = 0f;            // Сбрасываем время запуска
+        _launchPosition = Vector3.zero;   // Сбрасываем позицию запуска
+    }
+    
+
+    private void HeandlerStartLevel(LevelData levelData)
+    {
+        ClearTrail();
+    }
 
 }

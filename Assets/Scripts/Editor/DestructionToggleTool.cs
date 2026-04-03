@@ -14,8 +14,8 @@ public class DestructionToggleTool : ScriptableObject
     private static void ToggleAllDestructibles()
     {
         // Поиск всех Destructible компонентов в сцене
-        var destructibles = Object.FindObjectsByType<Destructible>(FindObjectsSortMode.None);
-
+        //var destructibles = Object.FindObjectsByType<Destructible>(FindObjectsSortMode.None);
+        Destructible[] destructibles = Object.FindObjectsByType<Destructible>();
 
         // Проверка наличия Destructible компонентов
         if (destructibles == null || destructibles.Length == 0)

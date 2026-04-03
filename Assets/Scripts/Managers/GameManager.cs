@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -12,6 +13,7 @@ public class GameManager : MonoBehaviour
 
     // Внутреннее состояние
     private bool _isGameActive = false;    // Флаг активности игры
+    private bool _isLevelEnded = false;    // Флаг окончания уровня
     private int _targetsCount = 0;         // Количество целей на уровне
     private int _targetsRemaining = 0;     // Количество оставшихся целей
     private int _projectailLaunched = 0;   // Количество выпущенных снарядов
@@ -22,6 +24,7 @@ public class GameManager : MonoBehaviour
     public static event Action OnVictory;                // Уведомление о победе
     public static event Action OnDefeat;                 // Уведомление о поражении
     public static event Action<LevelData> OnStartLevel;  // Уведомление о старте уровня
+    public static event Action OnLevelsOver;
 
     // Свойства
     public bool IsGameActive => _isGameActive; // Свойство для проверки активности игры
@@ -70,6 +73,7 @@ public class GameManager : MonoBehaviour
     {
         // 1. Сброс игрового состояния
         _isGameActive = true;
+        _isLevelEnded = false;
         _projectailLaunched = 0;      
 
         // 2. Уведомляем о загрузке уровня
@@ -104,19 +108,24 @@ public class GameManager : MonoBehaviour
 
     private void CountTarget()
     {
-        GameObject[] targets = GameObject.FindGameObjectsWithTag("Target");
-        _targetsCount = targets.Length;    // Сохраняем общее количество целей для текущего уровня
-        _targetsRemaining = _targetsCount; // Инициализируем счетчик оставшихся целей
-        Debug.Log("GameManager: Counted " + _targetsCount + " targets in the level.");
+        _targetsCount = _currentCastle.GetComponentsInChildren<Transform>()
+                                  .Count(t => t.CompareTag("Target"));
+
+        _targetsRemaining = _targetsCount;
+
+        Debug.Log($"GameManager: Counted {_targetsCount} targets in the current castle instance");
     }
 
 
     private void HandleTargetDestroyed(Rigidbody2D targetRb)
-    {                     
-        // 1. Уменьшаем счетчик оставшихся целей
+    {
+        // 1. Если уровень уже завершен - выходим
+        if (_isLevelEnded) return;
+        
+        // 2. Уменьшаем счетчик оставшихся целей
         _targetsRemaining--;  
         
-        // 2. Если целей больше нет, то запускаем победу
+        // 3. Если целей больше нет, то запускаем победу
         if (_targetsRemaining <= 0)
         {
             HandleVictory();
@@ -126,14 +135,16 @@ public class GameManager : MonoBehaviour
 
     private void HandleProjectileLaunched(Rigidbody2D projectileRb)
     {
-        // 1. Увеличиваем счетчик выпущенных снарядов 
+        // 1. Если уровень уже завершен - выходим
+        if (_isLevelEnded) return;
+
+        // 2. Увеличиваем счетчик выпущенных снарядов 
         _projectailLaunched++;  
         Debug.Log("GameManager: Projectile launched = " + _projectailLaunched);
 
-        // 2. Останавливаем игру, если достигнут лимит снарядов 
+        // 3. Останавливаем игру, если достигнут лимит снарядов 
         if (_projectailLaunched == _currentLevelData.projectileCount)
         {
-            // 2.1 Переключаем флаг
             _isGameActive = false;            
         }
         
@@ -141,7 +152,10 @@ public class GameManager : MonoBehaviour
 
     private void HandleProjectileDestroyed()
     {
-        // 1. Если снарядов больше нет, а цели ещё остались, то засчитываем поражение
+        // 1. Если уровень уже завершен - выходим
+        if (_isLevelEnded) return;
+
+        // 2. Если снарядов больше нет, а цели ещё остались, то засчитываем поражение
         if (_projectailLaunched == _currentLevelData.projectileCount && _targetsRemaining > 0)
         {
             HandleDefeat();
@@ -151,11 +165,15 @@ public class GameManager : MonoBehaviour
 
     private void HandleVictory()
     {
-        // 1. Останавливаем игру
+        // 1. Если уровень уже завершен - выходим
+        if (_isLevelEnded) return;
+        
+        // 2. Останавливаем игру
+        _isLevelEnded = true;
         _isGameActive = false; 
         Debug.Log("GameManager: Victory! All targets destroyed.");
 
-        // 2. Уведомляем о победе
+        // 3. Уведомляем о победе
         OnVictory?.Invoke();        
         
     }
@@ -163,11 +181,15 @@ public class GameManager : MonoBehaviour
 
     private void HandleDefeat()
     {
-        // 1. Переключаем флаг активности игры 
+        // 1. Если уровень уже завершен - выходим
+        if (_isLevelEnded) return;
+
+        // 2. Останавливаем игру 
+        _isLevelEnded = true;
         _isGameActive = false;
         Debug.Log("GameNamager: level is failed");
 
-        // 2. Уведомляем о поражении
+        // 3. Уведомляем о поражении
         OnDefeat?.Invoke();
     }
 
@@ -180,7 +202,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            // если уровня нет, то показываем финальный экран
+            OnLevelsOver?.Invoke();
         }
     }
 

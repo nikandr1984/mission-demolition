@@ -11,7 +11,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image _projectileIconPrefab;            // Префаб иконки снаряда
     [SerializeField] private GameObject _victoryPanel;               // Панель победы
     [SerializeField] private GameObject _defeatPanel;                // Панель поражения
-
+    [SerializeField] private GameObject _plugPanel;                  // Панель-заглушка
 
     // Внутреннее состояние
     private int _projectilesRemaining = 0;                       // Количество оставшихся снарядов
@@ -29,6 +29,7 @@ public class UIManager : MonoBehaviour
         GameManager.OnVictory += HandleVictory;
         GameManager.OnDefeat += HandleDefeat;
         GameManager.OnStartLevel += HandleStartLevel;
+        GameManager.OnLevelsOver += HandleLevelsOver;
         
     }
 
@@ -38,6 +39,7 @@ public class UIManager : MonoBehaviour
         GameManager.OnVictory -= HandleVictory;
         GameManager.OnDefeat -= HandleDefeat;
         GameManager.OnStartLevel -= HandleStartLevel;
+        GameManager.OnLevelsOver -= HandleLevelsOver;
     }
      
 
@@ -106,7 +108,7 @@ public class UIManager : MonoBehaviour
     private void HandleVictory()
     {
         // 1. Показываем панель победы
-        if (_victoryPanel != null)
+        if (_victoryPanel != null && !_defeatPanel.activeSelf)
         {
             _victoryPanel.SetActive(true);
         }
@@ -116,7 +118,10 @@ public class UIManager : MonoBehaviour
     private void HandleDefeat()
     {
         // 1. Показываем панель проигрыша
-        if (_defeatPanel != null) _defeatPanel.SetActive(true);        
+        if (_defeatPanel != null && _victoryPanel.activeSelf)
+        {
+            _defeatPanel.SetActive(true);
+        }
     }
 
     private void HandleStartLevel(LevelData levelData)
@@ -127,6 +132,11 @@ public class UIManager : MonoBehaviour
         // 2. Деактивируем панели, если они открыты
         if (_victoryPanel != null) _victoryPanel.SetActive(false);
         if (_defeatPanel != null) _defeatPanel.SetActive(false);
+    }
+
+    private void HandleLevelsOver()
+    {
+        _plugPanel.SetActive(true);
     }
 
    
