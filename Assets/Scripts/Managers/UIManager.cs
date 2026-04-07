@@ -118,7 +118,7 @@ public class UIManager : MonoBehaviour
     private void HandleDefeat()
     {
         // 1. Показываем панель проигрыша
-        if (_defeatPanel != null && _victoryPanel.activeSelf)
+        if (_defeatPanel != null && !_victoryPanel.activeSelf)
         {
             _defeatPanel.SetActive(true);
         }

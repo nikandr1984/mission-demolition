@@ -6,9 +6,9 @@ PhysicsMaterial2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PMat_Meat2D
+  m_Name: PMat_Ground2D
   serializedVersion: 2
-  friction: 0.9
-  bounciness: 0.1
+  friction: 0.6
+  bounciness: 0
   m_FrictionCombine: 0
   m_BounceCombine: 0
