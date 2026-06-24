@@ -16,18 +16,18 @@ public class Destructible : MonoBehaviour
 
     // Кэшируемые компоненты
     private Rigidbody2D _rigidBody2D;        // Ссылка на Rigidbody компонента    
-    private AudioSource _audioSource;        // Ссылка на AudioSource для воспроизведения звуков
-
+    
     // События
-    public static event Action<Rigidbody2D> OnTargetDestroyed; // Событие разрушения объекта (можно расширить с параметрами)
+    public static event Action<Rigidbody2D> OnTargetDestroyed;           // Событие уничтожения цели
+    public static event Action<DestructibleMaterial, float> OnBlockHit;  // Событие удара по объекту
+    public static event Action<DestructibleMaterial> OnBlockDestroyed;   // Событие разрушения блока
 
 
 
     private void Awake()
     {
         // Инициализация компонентов
-        _rigidBody2D = GetComponent<Rigidbody2D>();
-        _audioSource = GetComponent<AudioSource>();        
+        _rigidBody2D = GetComponent<Rigidbody2D>();              
 
         // Проверка наличия Rigidbody
         if (_rigidBody2D == null)
@@ -104,6 +104,8 @@ public class Destructible : MonoBehaviour
             damage = impactForce * externalMult;
         }
 
+        // Уведомляем об ударе (даже если блок не разрушился)
+        OnBlockHit?.Invoke(_material, impactForce);
 
         // Применение урона
         if (damage >= (_material?.damageThreshold ?? 10f))
@@ -115,12 +117,17 @@ public class Destructible : MonoBehaviour
 
     private void DestroyObject() 
     {
-        if (_isDestroyed) return; // Защита от повторного разрушения
+        // 1. Защита от повторного разрушения
+        if (_isDestroyed) return;
 
-        _isDestroyed = true;      // Установка флага разрушения
+        // 2. Установка флага разрушения
+        _isDestroyed = true;
 
+        // 3. Уведомляем о разрушении любого блока
+        OnBlockDestroyed?.Invoke(_material);
         
-        if (gameObject.CompareTag("Target")) // Если это Цель, оповещаем
+        // 3. Если это Цель, то оповещаем о ее уничтожении
+        if (gameObject.CompareTag("Target")) 
         {
             OnTargetDestroyed?.Invoke(_rigidBody2D);            
         }
@@ -133,21 +140,7 @@ public class Destructible : MonoBehaviour
         foreach (Renderer renderer in _renderers)
         {
             renderer.enabled = false;
-        }
-
-
-        // Воспроизведение визуального эффекта разрушения
-        if (_material?.breakVFX != null) 
-        {
-            var vfx = Instantiate(_material.breakVFX, transform.position, Quaternion.identity);
-            Destroy(vfx.gameObject, 2f);
-        }
-
-        // Воспроизведение звука разрушения
-        if (_material?.breakSound != null && _audioSource != null)
-        {
-            _audioSource.PlayOneShot(_material.breakSound, _material.soundVolume);
-        }
+        }       
 
 
         Invoke(nameof(Deactivate), 0.1f); // Отключение объекта через короткое время

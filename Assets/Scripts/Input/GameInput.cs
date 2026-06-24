@@ -101,5 +101,4 @@ public class GameInput : MonoBehaviour
         return _inputActions.Gameplay.Fire.ReadValue<float>() > 0.5f; 
     }
 
-
 }

@@ -17,6 +17,13 @@ MonoBehaviour:
   damageDealt: 4
   selfCollisionDamageMultiplier: 0.5
   externalImpactDamageMultiplier: 1
-  breakVFX: {fileID: 0}
-  breakSound: {fileID: 0}
-  soundVolume: 1
+  _hitClips:
+  - {fileID: 8300000, guid: 40b97f01f9bd66140a51bb9b227729cd, type: 3}
+  - {fileID: 8300000, guid: 736b906c52c31214fb15562977fcd1e9, type: 3}
+  - {fileID: 8300000, guid: f5834c4aa8ede60438a29b047cd76f08, type: 3}
+  _destroyClips:
+  - {fileID: 8300000, guid: 839a1cfd89ecb9d43b30ccd7e0cec02e, type: 3}
+  - {fileID: 8300000, guid: fc036d391eadd674590f075cb64e50d8, type: 3}
+  - {fileID: 8300000, guid: 0ecc0662ace773c4f9e2ffe3caf17f85, type: 3}
+  _hitVolume: 0.1
+  _destroyVolume: 0.2

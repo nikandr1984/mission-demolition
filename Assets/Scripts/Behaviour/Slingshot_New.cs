@@ -13,7 +13,7 @@ public class Slingshot_New : MonoBehaviour
     [SerializeField] private GameObject _prefabProjectile;    // Префаб снаряда
     [SerializeField] private Transform _launchPoint;          // Точка запуска снаряда
     [SerializeField] private GameInput _gameInput;            // Обработчик ввода
-    [SerializeField] private Camera _mainCamera;              // Главная камера
+    [SerializeField] private Camera _mainCamera;              // Главная камера    
 
     [Header("Physics Settings")]
     [SerializeField] private float _velocityMultiplier = 8f; // Сила выстрела
@@ -27,16 +27,18 @@ public class Slingshot_New : MonoBehaviour
     private Vector2 _launchPosition;              // Позиция точки запуска (кэш)
     private CircleCollider2D _slingshotCollider;  // Коллайдер рогатки для определения попадания курсора
     private GameObject _currentProjectile;        // Текущий активный снаряд
-    private Rigidbody2D _projectileRb;            // Физика текущего снаряда
+    private Rigidbody2D _projectileRb;            // Физика текущего снаряда   
     private bool _isCameraViewMode;               // Флаг: находится ли камера в режиме обзора
     private bool _isCursorOverSlingshot;          // Флаг: находится ли курсор на рогатке
+    private float _lastStretchAmount = 0f;        // Последнее значение натяжения
 
     private enum SlingshotState { Idle, Aiming, Flying }       // Состояния рогатки
     private SlingshotState _currentState = SlingshotState.Idle;
 
 
-    // Публичные API
+    // Внешние интерфейсы
     public static event Action<Rigidbody2D> OnProjectileLaunched; // Событие запуска снаряда
+    public static event Action<float, bool> OnStretchChanged;     // Событие изменения натяжения (для звуковой логики)
     public bool IsIdled => _currentState == SlingshotState.Idle; // Состояние простоя для внешнего чтения
 
 
@@ -170,7 +172,7 @@ public class Slingshot_New : MonoBehaviour
         _launchPoint.gameObject.SetActive(true);
 
         // 3. Создаем новый снаряд
-        SpawnProjectile();
+        SpawnProjectile();        
     }
 
 
@@ -188,10 +190,22 @@ public class Slingshot_New : MonoBehaviour
         // 4. Ограничиваем максимальное натяжение
         pullVector = Vector2.ClampMagnitude(pullVector, _maxPullDistance);
 
-        // 5. Вычисляем финальную позицию снаряда (противоположная сторона от вектора натяжения)
+        // 5. Вычисляем нормализованное натяжение (для события)
+        float stretchAmount = pullVector.magnitude / _maxPullDistance;
+
+        // 6. Определяем растет ли натяжение по сравнению с предыдущим кадром
+        bool isIncreasing = stretchAmount > (_lastStretchAmount + 0.01f);
+
+        // 7. Вызываем событие изменения натяжения, передавая силу и направление (растет или падает) 
+        OnStretchChanged?.Invoke(stretchAmount, isIncreasing);
+
+        // 8. Сохраняем текущее значение натяжения для сравнения в следующем кадре
+        _lastStretchAmount = stretchAmount;
+
+        // 9. Вычисляем финальную позицию снаряда (противоположная сторона от вектора натяжения)
         Vector2 newProjectilePos = _launchPosition - pullVector;
 
-        // 6. Применяем позицию - обновляем трансформ снаряда
+        // 10. Применяем позицию - обновляем трансформ снаряда
         _currentProjectile.transform.position = newProjectilePos;        
     }
 
@@ -340,6 +354,4 @@ public class Slingshot_New : MonoBehaviour
         // 2. Сбрасываем рогатку в состояние ожидания
         ResetSlingshot();
     }
-
-
 }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 750053647005531534}
   - component: {fileID: 4256708620753535692}
   - component: {fileID: 7639104711068032548}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: NormalProjectile
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.6999999, y: -6.4355, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -84,7 +84,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 77afcd0a48802a146a5f51e27094121d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a8318942a6e2e204f8d941e014915082, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -142,7 +142,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 5
+  m_Mass: 4
   m_LinearDamping: 0.1
   m_AngularDamping: 2
   m_GravityScale: 1

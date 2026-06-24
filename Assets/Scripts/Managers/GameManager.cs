@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
         Destructible.OnTargetDestroyed += HandleTargetDestroyed;
         Slingshot_New.OnProjectileLaunched += HandleProjectileLaunched;
         ProjectaileBehaviour.OnProjectailDestroyed += HandleProjectileDestroyed;
+        UIManager.OnRestartButtonClicked += HandlerRestartButtonClicked;
     }
 
     private void OnDisable()
@@ -44,6 +45,7 @@ public class GameManager : MonoBehaviour
         Destructible.OnTargetDestroyed -= HandleTargetDestroyed;
         Slingshot_New.OnProjectileLaunched -= HandleProjectileLaunched;
         ProjectaileBehaviour.OnProjectailDestroyed -= HandleProjectileDestroyed;
+        UIManager.OnRestartButtonClicked -= HandlerRestartButtonClicked;
     }
 
 
@@ -53,8 +55,7 @@ public class GameManager : MonoBehaviour
         // Реализация синглтона
         if (Instance == null)
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
+            Instance = this;            
         }
         else
         {
@@ -128,7 +129,7 @@ public class GameManager : MonoBehaviour
         // 3. Если целей больше нет, то запускаем победу
         if (_targetsRemaining <= 0)
         {
-            HandleVictory();
+            HandlerVictory();
         }
     }
 
@@ -158,12 +159,12 @@ public class GameManager : MonoBehaviour
         // 2. Если снарядов больше нет, а цели ещё остались, то засчитываем поражение
         if (_projectailLaunched == _currentLevelData.projectileCount && _targetsRemaining > 0)
         {
-            HandleDefeat();
+            HandlerDefeat();
         }   
     }
 
 
-    private void HandleVictory()
+    private void HandlerVictory()
     {
         // 1. Если уровень уже завершен - выходим
         if (_isLevelEnded) return;
@@ -179,7 +180,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    private void HandleDefeat()
+    private void HandlerDefeat()
     {
         // 1. Если уровень уже завершен - выходим
         if (_isLevelEnded) return;
@@ -194,6 +195,13 @@ public class GameManager : MonoBehaviour
     }
 
 
+    private void HandlerRestartButtonClicked()
+    {
+        StartLevel(_currentLevelData);
+    }
+
+
+
     public void LoadNextLevel()
     {
         if(_currentLevelData.nextLevelData != null)
@@ -205,10 +213,5 @@ public class GameManager : MonoBehaviour
             OnLevelsOver?.Invoke();
         }
     }
-
-
-    public void RestartLevel()
-    {
-        StartLevel(_currentLevelData);
-    }
+    
 }

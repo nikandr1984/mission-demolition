@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System;
+using UnityEngine.SceneManagement;
 
 
 public class UIManager : MonoBehaviour
@@ -9,17 +10,24 @@ public class UIManager : MonoBehaviour
     // Поля для настройки в инспекторе     
     [SerializeField] private Transform _projectaleIconsContainer;    // Контейнер для иконок снарядов
     [SerializeField] private Image _projectileIconPrefab;            // Префаб иконки снаряда
+    [SerializeField] private string _mainMenuSceneName = "MainMenu"; // Название сцены главного меню
     [SerializeField] private GameObject _victoryPanel;               // Панель победы
     [SerializeField] private GameObject _defeatPanel;                // Панель поражения
     [SerializeField] private GameObject _plugPanel;                  // Панель-заглушка
+    [SerializeField] private GameObject _exitMenuPanel;              // Панель выхода в главное меню
+    [SerializeField] private GameObject _exitGamePanel;              // Панель выхода из игры
 
     // Внутреннее состояние
     private int _projectilesRemaining = 0;                       // Количество оставшихся снарядов
+    private GameObject _panelThatOpenedExitDialog;               // Сылка на панель, которая активировала диалог
     private readonly List<Image> _activeProjectileIcons = new(); // Список активных иконок снарядов
+
                                                                   
 
     // События
-    public static event Action OnViewButtonClicked; // Событие, когда игрок нажимает на кнопку Обзор
+    public static event Action OnViewButtonClicked;    // Событие, когда игрок нажимает на кнопку Обзор
+    public static event Action OnRestartButtonClicked; // Событие, когда игрок нажимает на кнопку Рестарт
+    public static event Action OnAnyButtonClicked;     // Событие, когда игрок нажимает на любую кнопку
 
 
 
@@ -153,15 +161,122 @@ public class UIManager : MonoBehaviour
             _activeProjectileIcons.RemoveAt(i);
         }
     }
-         
-    
+
+
+
+    // === Методы для UI кнопок ===
 
     public void ViewButtonClicked()
     {
         if(Slingshot_New.Instance.IsIdled)
         {
             OnViewButtonClicked?.Invoke();
+            OnAnyButtonClicked?.Invoke();
             Debug.Log("UIManager: Игрок кликнул на кнопку Обзор (рогатка в режиме ожидания)");
         }        
     }
+
+
+    public void RestartButtonClicked()
+    {
+        OnRestartButtonClicked?.Invoke();
+        OnAnyButtonClicked?.Invoke();
+        Debug.Log("UIManager: Игрок кликнул на кнопку Рестарт");
+    }
+
+    public void HomeButtonClicked()
+    {
+        // 1. Проверка ссылок на null
+        if (_exitMenuPanel == null) return;
+
+        // 2. Активируем панель подтверждения выхода в главное меню
+        _exitMenuPanel.SetActive(true);
+
+        // 3. Оповещаем подписчиков о нажатии кнопки
+        OnAnyButtonClicked?.Invoke();
+    }
+
+
+    public void ConfirmHomeButtonClicked()
+    {
+        // 1. Загружаем сцену главного меню
+        SceneManager.LoadScene(_mainMenuSceneName);
+
+        // 2. Оповещаем подписчиков о нажатии кнопки
+        OnAnyButtonClicked?.Invoke();
+    }
+
+
+    public void ExitButtonClicked()
+    {
+        // 1. Проверка ссылок на null
+        if (_exitGamePanel == null) return;             
+                
+        // 2. Запоминаем какая панель была активна до нажатия на кнопку
+        if (_victoryPanel != null && _victoryPanel.activeSelf)
+        {
+            _panelThatOpenedExitDialog = _victoryPanel;
+        }
+        else if (_defeatPanel != null && _defeatPanel.activeSelf)
+        {
+            _panelThatOpenedExitDialog = _defeatPanel;
+        }
+        else
+        {
+            _panelThatOpenedExitDialog = null;
+        }
+
+        // 3. Деактивируем панель победы / проигрыша
+        _victoryPanel.SetActive(false);
+        _defeatPanel.SetActive(false);
+
+        // 4. Активируем панель подтверждения выхода из игры
+        _exitGamePanel.SetActive(true);            
+
+        // 5. Оповещаем подписчиков о нажатии кнопки
+        OnAnyButtonClicked?.Invoke();
+    }
+
+
+
+    public void ConfirmExitButtonClicked()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false; // Остановка Play Mode
+#else
+        Application.Quit();                              // Закрытие билда
+#endif
+        Debug.Log("Application is closed");
+    }
+
+
+
+    // МЕТОД отмены действия выхода из игры 
+    public void CancelExitButtonClicked()
+    {
+        // 1. Проверка на null
+        if (_exitGamePanel == null) return;
+        
+        // 2. Закрываем панель выхода и открываем предыдущую, если она была
+        if (_panelThatOpenedExitDialog != null)
+        {
+            // Скрываем панель подтверждения выхода
+            _exitGamePanel.SetActive(false);
+
+            // Восстанавливаем панель, которая открыла диалог
+            _panelThatOpenedExitDialog.SetActive(true);
+
+            // Очищаем ссылку
+            _panelThatOpenedExitDialog = null;
+        }
+        else
+        {
+            _exitGamePanel.SetActive(false);
+        }
+
+        // 3. Оповещаем подписчиков о нажатии кнопки
+        OnAnyButtonClicked?.Invoke();
+    }
+          
+
 }
