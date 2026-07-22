@@ -206,6 +206,19 @@ public class UIManager : MonoBehaviour
         OnAnyButtonClicked?.Invoke();
     }
 
+    public void CancelHomeButtonClicked()
+    {
+        // 1. Проверка ссылок на null
+        if (_exitMenuPanel == null) return;
+
+        // 2. Деактивируем панель подтверждения выхода в главное меню
+        _exitMenuPanel.SetActive(false);
+
+        // 3. Оповещаем подписчиков о нажатии кнопки
+        OnAnyButtonClicked?.Invoke();
+    }
+
+
 
     public void ExitButtonClicked()
     {

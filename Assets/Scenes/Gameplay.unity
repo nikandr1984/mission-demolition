@@ -1607,7 +1607,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 206682669}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: CencelButtonClicked
+        m_MethodName: CancelHomeButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
